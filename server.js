@@ -1,22 +1,19 @@
 // server.js
 
-// Modules =====
+// Modules ==============================
 var express        = require('express');
+var mongoose       = require('mongoose');
 var app            = express();
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 
-// configuration =====
-
-// config files
-var db = require('./config/db');
+// configuration ==============================
 
 // set our port
 var port = process.env.PORT || 8000; 
 
 // connect to our mongoDB database 
-// (uncomment after you enter in your own credentials in config/db.js)
-// mongoose.connect(db.url); 
+mongoose.connect('mongodb://localhost:27017/test');
 
 // get all data/stuff of the body (POST) parameters
 // parse application/json 
@@ -34,15 +31,15 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 // set the static files location /public/img will be /img for users
 app.use(express.static(__dirname + '/public')); 
 
-// routes =====
+// routes ==============================
 require('./app/routes')(app); // configure our routes
 
-// start app =====
+// start app ==============================
 // startup our app at http://localhost:8000
 app.listen(port);               
 
 // shoutout to the user                     
-console.log('Magic happens on port ' + port);
+console.log('Started server on port: ' + port);
 
 // expose app           
 exports = module.exports = app;
