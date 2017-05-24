@@ -32,14 +32,8 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(express.static(__dirname + '/public')); 
 
 // routes ==============================
-require('./app/routes')(app); // configure our routes
+require('./app/routes')(app);
 
-// start app ==============================
-// startup our app at http://localhost:8000
-app.listen(port);               
-
-// shoutout to the user                     
+app.listen(port);                         
 console.log('Started server on port: ' + port);
-
-// expose app           
 exports = module.exports = app;
